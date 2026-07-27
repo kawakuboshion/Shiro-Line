@@ -11,11 +11,13 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _burstTime = 5.0f; //バーストモードの継続時間
 
     private Rigidbody2D _rb;
+    private Vector2 _velocity;
     private Vector2 _dragStartPos;
     private Vector2 _currentInputDirection;
     private float _currentBurstTime;
     private bool _isDragging = false;
     private bool _isBurstMode = false;
+    private bool _canMove = true;
 
     void Start()
     {
@@ -40,6 +42,11 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!_canMove) 
+        { 
+            _rb.linearVelocity = Vector2.zero;  
+            return; 
+        }
         MovePlayer();
     }
 
@@ -86,12 +93,14 @@ public class PlayerMove : MonoBehaviour
             // 目標とする速度を計算
             Vector2 targetVelocity = _currentInputDirection * _moveSpeed;
             // 現在の速度から目標の速度へ、加速度（acceleration）に応じて滑らかに近づける
-            _rb.linearVelocity = Vector2.Lerp(_rb.linearVelocity, targetVelocity, _acceleration * Time.fixedDeltaTime);
+            _velocity = Vector2.Lerp(_rb.linearVelocity, targetVelocity, _acceleration * Time.fixedDeltaTime);
+            _rb.linearVelocity = _velocity;
         }
         else
         {
             // 指が離されたら、減速度（deceleration）に応じてじわっと停止させる
-            _rb.linearVelocity = Vector2.Lerp(_rb.linearVelocity, Vector2.zero, _deceleration * Time.fixedDeltaTime);
+            _velocity = Vector2.Lerp(_rb.linearVelocity, Vector2.zero, _deceleration * Time.fixedDeltaTime);
+            _rb.linearVelocity = _velocity;
         }
     }
 
@@ -105,6 +114,8 @@ public class PlayerMove : MonoBehaviour
             _currentBurstTime = 0;
         }
     }
+
+    public void SetCanMove(bool canMove) { _canMove = canMove; }
 
     private void EndBurstMode()
     {

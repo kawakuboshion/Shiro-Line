@@ -6,10 +6,9 @@ public class ColorInkArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var playerColorController = collision.gameObject.GetComponent<PlayerColorController>();
-        if (playerColorController != null)
+        if (collision.gameObject.TryGetComponent<PlayerColorController>(out var playerColorController))
         {
-            playerColorController.ChangeColor(_targetColor);
+            playerColorController.ChangeColor(_targetColor, true);
         }
     }
 }

@@ -19,16 +19,27 @@ public class PlayerColorController : MonoBehaviour
 
     private void Start()
     {
-        ChangeColor(PlayerColor);
+        ChangeColor(PlayerColor, true);
     }
 
-    public void ChangeColor(PlayerColor color)
+    public void ChangeColor(PlayerColor color, bool plus = true)
     {
         if(color == PlayerColor.Black)
         {
-            GameManager.Instance.GameOver();
+            GameManager.Instance.GameOver(transform.position, _colors[(int)_playerColor]);
+            AudioManager.Instance.PlaySE(AudioManager.SE.Death);
+            Destroy(gameObject);
+            return;
         }
-        _playerColor = _playerColor == PlayerColor.White ? color : PlayerColor | color;
+        AudioManager.Instance.PlaySE(AudioManager.SE.InkGet);
+        if(plus)
+        {
+            _playerColor = _playerColor == PlayerColor.White ? color : PlayerColor | color;
+        }
+        else
+        {
+            _playerColor &= ~color;
+        }
         if(_playerColor == PlayerColor.White)
         {
             _playerMove.StartBurstMode();
