@@ -27,9 +27,14 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
-        Time.timeScale = 1.0f;
         _walls = FindObjectsByType<ColorWall>(FindObjectsSortMode.None);
+    }
+
+    private void Start()
+    {
+        Time.timeScale = 1.0f;
         _playerMove.SetCanMove(true);
+        UpdateWallCollision();
     }
 
     private void Update()
@@ -45,7 +50,10 @@ public class GameManager : MonoBehaviour
     {
         foreach (var wall in _walls)
         {
-            wall.CheckCollision(_playerCollider);
+            if(wall != null)
+            {
+                wall.CheckCollision(_playerCollider);
+            }
         }
     }
 

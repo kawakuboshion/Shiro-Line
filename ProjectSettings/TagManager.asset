@@ -50,6 +50,9 @@ TagManager:
   - name: InkArea
     uniqueID: 1342124071
     locked: 0
+  - name: Gimmick
+    uniqueID: 3881719239
+    locked: 0
   - name: Player
     uniqueID: 176258879
     locked: 0
