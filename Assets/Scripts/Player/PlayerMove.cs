@@ -8,13 +8,11 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _acceleration = 5f;  // 加速度（高いほどすぐ最高速になる）
     [SerializeField] private float _deceleration = 2f;  // 減速度（指を離したときの滑り具合。高いほどすぐ止まる）
     [SerializeField] private float _burstMultiply = 2f; //バーストモードになったときに最高速度と加速度にかける値
-    [SerializeField] private float _burstTime = 5.0f; //バーストモードの継続時間
 
     private Rigidbody2D _rb;
     private Vector2 _velocity;
     private Vector2 _dragStartPos;
     private Vector2 _currentInputDirection;
-    private float _currentBurstTime;
     private bool _isDragging = false;
     private bool _isBurstMode = false;
     private bool _canMove = true;
@@ -32,12 +30,6 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         HandleInput();
-
-        if(_currentBurstTime >= _burstTime)
-        {
-            EndBurstMode();
-        }
-        _currentBurstTime += Time.deltaTime;
     }
 
     void FixedUpdate()
@@ -111,13 +103,12 @@ public class PlayerMove : MonoBehaviour
             _isBurstMode = true;
             _moveSpeed *= _burstMultiply;
             _acceleration *= _burstMultiply;
-            _currentBurstTime = 0;
         }
     }
 
     public void SetCanMove(bool canMove) { _canMove = canMove; }
 
-    private void EndBurstMode()
+    public void EndBurstMode()
     {
         if(_isBurstMode)
         {

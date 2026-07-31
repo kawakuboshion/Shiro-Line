@@ -15,7 +15,7 @@ public class ColorWall : MonoBehaviour
         if(collision.gameObject.TryGetComponent<PlayerColorController>(out var player))
         {
             var playerColor = player.PlayerColor;
-            if ((playerColor & _wallColor) == _wallColor)
+            if (playerColor == _wallColor || playerColor == PlayerColor.White || playerColor == PlayerColor.None)
             {
                 // 衝突判定を「無視する（すり抜ける）」に設定
                 Physics2D.IgnoreCollision(collision, _wallCollider, true);

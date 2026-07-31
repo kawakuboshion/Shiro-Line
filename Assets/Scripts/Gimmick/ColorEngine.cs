@@ -36,7 +36,7 @@ public class ColorEngine : MonoBehaviour
         if (collision.TryGetComponent<PlayerColorController>(out var player))
         {
             // プレイヤーの色が、このエンジンが求めている色と【一致】しているか
-            if ((player.PlayerColor & _requiredColor) == _requiredColor)
+            if (player.PlayerColor == _requiredColor || player.PlayerColor == PlayerColor.White || player.PlayerColor == PlayerColor.None)
             {
                 // エンジンを起動
                 _isActive = true;

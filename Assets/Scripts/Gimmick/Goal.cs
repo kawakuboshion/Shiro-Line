@@ -9,7 +9,7 @@ public class Goal : MonoBehaviour
     {
         if(collision.gameObject.TryGetComponent<PlayerColorController>(out PlayerColorController player))
         {
-            if(player.PlayerColor == PlayerColor.White)
+            if(player.PlayerColor == PlayerColor.White || player.PlayerColor == PlayerColor.None)
             {
                 GameManager.Instance.StageClear(_nextScene, transform.position, _waitTime);
                 AudioManager.Instance.PlaySE(AudioManager.SE.Clear);

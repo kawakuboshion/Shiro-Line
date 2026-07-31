@@ -37,9 +37,13 @@ public class PlayerColorController : MonoBehaviour
         {
             _playerColor &= ~color;
         }
-        if(_playerColor == PlayerColor.White)
+        if(_playerColor == PlayerColor.White || _playerColor == PlayerColor.None)
         {
             _playerMove.StartBurstMode();
+        }
+        else
+        {
+            _playerMove.EndBurstMode();
         }
         GameManager.Instance.UpdateWallCollision();
         Color newColor = _playerColorManager.GetColor(_playerColor);

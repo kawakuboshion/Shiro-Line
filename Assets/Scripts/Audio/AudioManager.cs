@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
@@ -12,8 +13,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] _bgm;
 
     [Header("効果音（SE）の素材")]
-    [SerializeField] private AudioClip[] _se;    
+    [SerializeField] private AudioClip[] _se;
 
+    [SerializeField] private AudioMixer _audioMixer;
     public enum BGM
     {
         Title,
@@ -65,13 +67,5 @@ public class AudioManager : MonoBehaviour
             _bgmSource.loop = true;
             _bgmSource.Play();
         }
-    }
-
-    /// <summary>
-    /// BGMの音量を一時的に下げる（死亡時などの演出用）
-    /// </summary>
-    public void SetBGMVolume(float volume)
-    {
-        if (_bgmSource != null) _bgmSource.volume = volume;
     }
 }

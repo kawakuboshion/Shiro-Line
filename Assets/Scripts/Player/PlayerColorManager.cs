@@ -15,6 +15,7 @@ public class PlayerColorManager: MonoBehaviour
 [Flags]
 public enum PlayerColor : uint
 {
+    None = 0,
     Red = 1 << 0,//1
     Blue = 1 << 1,//2
     Green = 1 << 2,//4
