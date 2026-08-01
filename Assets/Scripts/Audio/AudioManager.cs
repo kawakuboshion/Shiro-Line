@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour
     public enum BGM
     {
         Title,
-        StageSelect,
+        Result,
         Stage,
     }
     

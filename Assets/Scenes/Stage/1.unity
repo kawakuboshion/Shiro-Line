@@ -1270,6 +1270,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2580921960958113235, guid: 4723f29b58a363a488c96f8c1d12aebc, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5702901413016395086, guid: 4723f29b58a363a488c96f8c1d12aebc, type: 3}
       propertyPath: m_LocalScale.y
       value: 4
