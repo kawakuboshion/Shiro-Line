@@ -16,7 +16,7 @@ public class Goal : MonoBehaviour
             }
             else
             {
-                GameManager.Instance.SetInfoText("『白』の状態でなければ、先には進めない！", Color.red);
+                GameManager.Instance.SetInfoText("『白』の状態でなければ、ゴールできない！", Color.red);
             }
         }
     }
